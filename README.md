@@ -15,10 +15,10 @@ O Lincadinho é projetado para incentivar o desenvolvimento colaborativo e o int
 Este repositório apresenta a API RESTful do projeto
 
 ## Principais Funcionalidades
--[ ] Cadastro de organizações 
--[ ] Cadastro de usuários
--[ ] Cadastro de feedbacks
--[ ] Cadastro de projetos 
+- [ ] Cadastro de organizações 
+- [ ] Cadastro de usuários
+- [ ] Cadastro de feedbacks
+- [ ] Cadastro de projetos 
 
 ## Endpoints
 
