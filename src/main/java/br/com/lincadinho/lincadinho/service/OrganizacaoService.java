@@ -5,8 +5,11 @@ import br.com.lincadinho.lincadinho.dto.DetalharOrganizacaoDTO;
 import br.com.lincadinho.lincadinho.model.Organizacao;
 import br.com.lincadinho.lincadinho.repository.OrganizacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.awt.print.Pageable;
 
 @Service
 public class OrganizacaoService {
@@ -26,5 +29,9 @@ public class OrganizacaoService {
 
     private String uploadImagem(MultipartFile imagem) {
         return "";
+    }
+
+    public Page<Organizacao> listarOrganizacoes(Pageable paginacao) {
+        return organizacaoRepository.findAllByAtivoTrue(paginacao);
     }
 }
