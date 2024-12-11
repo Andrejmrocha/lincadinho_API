@@ -13,22 +13,22 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class OrganizacaoService {
+
     @Autowired
     private OrganizacaoRepository organizacaoRepository;
+
+    @Autowired
+    private AWSService awsService;
 
     public Organizacao criarOrganizacao(CadastrarOrganizacaoDTO dados) {
         String url = null;
 
         if (dados.logo() != null) {
-            url = this.uploadImagem(dados.logo());
+            url = this.awsService.uploadImagem(dados.logo());
         }
 
         Organizacao organizacao = new Organizacao(dados.nome(), url);
         return organizacaoRepository.save(organizacao);
-    }
-
-    private String uploadImagem(MultipartFile imagem) {
-        return "";
     }
 
     public Page<Organizacao> listarOrganizacoes(Pageable paginacao) {
