@@ -36,7 +36,7 @@ Este repositório apresenta a API RESTful do projeto
 "imagem": arquivo
 ```
 **RESPONSE**
-```json
+```
 {
 	"id": 2,
 	"nome": "jonys devs",
@@ -47,7 +47,7 @@ Este repositório apresenta a API RESTful do projeto
 ***
 <h3 id="post-organizacao-detalhes">GET /organizacao</h3>
 **RESPONSE**
-```json
+```
 {
   "_embedded": {
     "dadosListagemOrganizacaoDTOList": [
@@ -84,7 +84,7 @@ Este repositório apresenta a API RESTful do projeto
 "imagem": arquivo
 ```
 **RESPONSE**
-```json
+```
 {
   "id": 2,
   "nome": "Jonys house",
