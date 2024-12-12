@@ -1,4 +1,4 @@
-package br.com.lincadinho.lincadinho.model;
+package br.com.lincadinho.lincadinho.model.organizacao;
 
 
 import jakarta.persistence.*;
@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Table
 @Entity
@@ -19,13 +20,12 @@ public class Organizacao {
     private Long id;
 
     private String nome;
-    private String url_imagem;
+    private String urlImagem;
     private boolean ativo;
 
     public Organizacao(String nome, String url) {
         this.nome = nome;
-        this.url_imagem = url;
+        this.urlImagem = url;
         this.ativo = true;
     }
-
 }

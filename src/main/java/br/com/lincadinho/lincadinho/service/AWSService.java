@@ -1,5 +1,6 @@
 package br.com.lincadinho.lincadinho.service;
 
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,7 +38,8 @@ public class AWSService {
         try {
             amazonS3.deleteObject(bucket, url_imagem);
             return true;
-        } catch (Exception e) {
+        } catch (AmazonServiceException e) {
+            System.out.println(e);
             return false;
         }
     }

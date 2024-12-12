@@ -1,7 +1,7 @@
 package br.com.lincadinho.lincadinho.repository;
 
 import br.com.lincadinho.lincadinho.dto.CadastrarOrganizacaoDTO;
-import br.com.lincadinho.lincadinho.model.Organizacao;
+import br.com.lincadinho.lincadinho.model.organizacao.Organizacao;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
