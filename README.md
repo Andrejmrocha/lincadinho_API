@@ -30,13 +30,17 @@ Este repositório apresenta a API RESTful do projeto
 | <kbd>DELETE /organizacao </kbd> | Excluir organização   |
 
 <h3 id="post-organizacao-detalhes">POST /organizacao</h3>
+
 **REQUEST MULTIPART-FORM DATA**
+
 ```
-"nome": "empresa"
+"nome": "jonys devs"
 "imagem": arquivo
 ```
+
 **RESPONSE**
-```
+
+```json
 {
 	"id": 2,
 	"nome": "jonys devs",
@@ -46,7 +50,9 @@ Este repositório apresenta a API RESTful do projeto
 ```
 ***
 <h3 id="post-organizacao-detalhes">GET /organizacao</h3>
+
 **RESPONSE**
+
 ```
 {
   "_embedded": {
@@ -76,14 +82,20 @@ Este repositório apresenta a API RESTful do projeto
   }
 }
 ```
+
 ***
 <h3 id="post-organizacao-detalhes">PUT /organizacao</h3>
+
 **REQUEST MULTIPART-FORM DATA**
+
 ```
-"nome": "empresa"
+"nome": "Jonys house"
 "imagem": arquivo
+"id": 2
 ```
+
 **RESPONSE**
+
 ```
 {
   "id": 2,
