@@ -32,7 +32,7 @@ Este repositório apresenta a API RESTful do projeto
 <h3 id="post-organizacao-detalhes">POST /organizacao</h3>
 **REQUEST MULTIPART-FORM DATA**
 ```
-"nome": "empresa"
+"nome": "jonys devs"
 "imagem": arquivo
 ```
 **RESPONSE**
@@ -76,9 +76,7 @@ Este repositório apresenta a API RESTful do projeto
   }
 }
 ```
-
-***
-<h3 id="get-organizacao-buscar-detalhes">GET /organizacao/id</h3>
+<h3 id="get-organizacao-busca-detalhes">GET /organizacao/id</h3>
 **RESPONSE**
 ```json
 {
