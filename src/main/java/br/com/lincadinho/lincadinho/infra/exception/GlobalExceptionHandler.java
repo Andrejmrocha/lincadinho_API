@@ -1,5 +1,6 @@
 package br.com.lincadinho.lincadinho.infra.exception;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
@@ -16,5 +17,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleMultipartException(HttpMediaTypeNotSupportedException ex, WebRequest request) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body("Requisição inválida: Esperado multipart/form-data, mas outro tipo foi recebido");
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException ex, WebRequest request) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ex.getMessage());
     }
 }

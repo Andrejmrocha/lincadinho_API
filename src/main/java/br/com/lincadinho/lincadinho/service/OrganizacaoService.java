@@ -3,11 +3,14 @@ package br.com.lincadinho.lincadinho.service;
 import br.com.lincadinho.lincadinho.dto.CadastrarOrganizacaoDTO;
 import br.com.lincadinho.lincadinho.model.organizacao.Organizacao;
 import br.com.lincadinho.lincadinho.repository.OrganizacaoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Optional;
 
 
 @Service
@@ -35,27 +38,42 @@ public class OrganizacaoService {
     }
 
     public Organizacao atualizarOrganizacao(String nome, MultipartFile imagem, Long id) {
-        var organizacao = organizacaoRepository.getReferenceById(id);
-        if (imagem != null) {
-            boolean imagemDeletada = (organizacao.getUrlImagem() == null) || awsService.deletarImagem(organizacao.getUrlImagem());
-            if (imagemDeletada) {
-                String novaUrlImagem = awsService.uploadImagem(imagem);
-                if (novaUrlImagem != null) {
-                    organizacao.setUrlImagem(novaUrlImagem);
+        Optional<Organizacao> organizacaoOptional = organizacaoRepository.findByIdAndAtivo(id, true);
+        if (organizacaoOptional.isPresent()) {
+            if (imagem != null) {
+                boolean imagemDeletada = (organizacaoOptional.get().getUrlImagem() == null) || awsService.deletarImagem(organizacaoOptional.get().getUrlImagem());
+                if (imagemDeletada) {
+                    String novaUrlImagem = awsService.uploadImagem(imagem);
+                    if (novaUrlImagem != null) {
+                        organizacaoOptional.get().setUrlImagem(novaUrlImagem);
+                    }
                 }
             }
-        }
 
-        if (nome != null) {
-            organizacao.setNome(nome);
+            if (nome != null) {
+                organizacaoOptional.get().setNome(nome);
+            }
+            return (organizacaoOptional.get());
+        } else {
+            throw new EntityNotFoundException("Organização não encontrada para o ID: " + id);
         }
-
-        return organizacaoRepository.save(organizacao);
     }
 
     public void excluirOrganizacao(Long id) {
-        var organizacao = organizacaoRepository.getReferenceById(id);
-        organizacao.setAtivo(false);
-        organizacaoRepository.save(organizacao);
+        Optional<Organizacao> organizacaoOptional = organizacaoRepository.findByIdAndAtivo(id, true);
+        if (organizacaoOptional.isPresent()) {
+            organizacaoOptional.get().setAtivo(false);
+        } else {
+            throw new EntityNotFoundException("Organização não encontrada para o ID: " + id);
+        }
+    }
+
+    public Organizacao buscarOrganizacao(Long id) {
+        Optional<Organizacao> organizacaoOptional = organizacaoRepository.findByIdAndAtivo(id, true);
+        if (organizacaoOptional.isPresent()) {
+            return organizacaoOptional.get();
+        } else {
+            throw new EntityNotFoundException("Organização não encontrada para o ID: " + id);
+        }
     }
 }

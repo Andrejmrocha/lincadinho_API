@@ -36,7 +36,7 @@ Este repositório apresenta a API RESTful do projeto
 "imagem": arquivo
 ```
 **RESPONSE**
-```
+```json
 {
 	"id": 2,
 	"nome": "jonys devs",
@@ -45,9 +45,9 @@ Este repositório apresenta a API RESTful do projeto
 }
 ```
 ***
-<h3 id="post-organizacao-detalhes">GET /organizacao</h3>
+<h3 id="get-organizacao-lista-detalhes">GET /organizacao</h3>
 **RESPONSE**
-```
+```json
 {
   "_embedded": {
     "dadosListagemOrganizacaoDTOList": [
@@ -76,15 +76,29 @@ Este repositório apresenta a API RESTful do projeto
   }
 }
 ```
+
 ***
-<h3 id="post-organizacao-detalhes">PUT /organizacao</h3>
+<h3 id="get-organizacao-buscar-detalhes">GET /organizacao/id</h3>
+**RESPONSE**
+```json
+{
+	"id": 3,
+	"nome": "jonys club",
+	"url_imagem": "link.consulting-company_16449809.jpg",
+	"ativo": true
+}
+```
+
+***
+<h3 id="put-organizacao-detalhes">PUT /organizacao</h3>
 **REQUEST MULTIPART-FORM DATA**
 ```
-"nome": "empresa"
+"id": 2
+"nome": "Jonys house"
 "imagem": arquivo
 ```
 **RESPONSE**
-```
+```json
 {
   "id": 2,
   "nome": "Jonys house",
@@ -93,7 +107,7 @@ Este repositório apresenta a API RESTful do projeto
 }
 ```
 ***
-<h3 id="post-organizacao-detalhes">DELETE /organizacao/id</h3>
+<h3 id="delete-organizacao-detalhes">DELETE /organizacao/id</h3>
 
 **RESPONSE**<br><br>
 ![Static Badge](https://img.shields.io/badge/204-green) No Content

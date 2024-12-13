@@ -45,6 +45,12 @@ public class OrganizacaoController {
         return ResponseEntity.ok(pagedModel);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DetalharOrganizacaoDTO> detalharOrganizacoes(@PathVariable Long id) {
+        var organizacao = organizacaoService.buscarOrganizacao(id);
+        return ResponseEntity.ok(new DetalharOrganizacaoDTO(organizacao));
+    }
+
     @PutMapping(consumes = "multipart/form-data")
     @Transactional
     public ResponseEntity atualizarOrganizacao(
