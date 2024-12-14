@@ -26,6 +26,7 @@ Este repositório apresenta a API RESTful do projeto
 |---------------------------------|-----------------------|
 | <kbd>POST /organizacao</kbd>    | Cadastrar organização |
 | <kbd>GET /organizacao </kbd>    | Listar organizações   |
+| <kbd>GET /organizacao/id </kbd> | Buscar organização    |
 | <kbd>PUT /organizacao/id </kbd> | Editar organização    |
 | <kbd>DELETE /organizacao </kbd> | Excluir organização   |
 

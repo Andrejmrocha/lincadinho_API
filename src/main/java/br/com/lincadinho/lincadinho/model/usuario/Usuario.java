@@ -1,5 +1,6 @@
 package br.com.lincadinho.lincadinho.model.usuario;
 
+import br.com.lincadinho.lincadinho.dto.RegistrarUsuarioDTO;
 import br.com.lincadinho.lincadinho.model.organizacao.Organizacao;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -25,9 +27,10 @@ public class Usuario implements UserDetails {
     private Long id;
 
     private String nome;
-    private String sobrenome;
     private String email;
     private String senha;
+
+    @Enumerated(EnumType.STRING)
     private UserRole role;
     private String foto_url;
 
@@ -35,9 +38,20 @@ public class Usuario implements UserDetails {
     @JoinColumn(name = "organizacao_id")
     private Organizacao organizacao;
 
+    public Usuario(RegistrarUsuarioDTO dados, String senhaCripto, Organizacao organizacao) {
+        System.out.println("Inicio construtor usuario");
+        this.nome = dados.nome();
+        this.email = dados.email();
+        this.senha = senhaCripto;
+        this.role = dados.role();
+        this.organizacao = organizacao;
+        System.out.println("Fim construtor usuario");
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ADMIN"), new SimpleGrantedAuthority("USER"));
+        else return List.of(new SimpleGrantedAuthority("USER"));
     }
 
     @Override
