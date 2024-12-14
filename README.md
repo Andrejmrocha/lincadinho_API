@@ -22,13 +22,15 @@ Este repositório apresenta a API RESTful do projeto
 
 ## Endpoints
 
-| Rota                            | Descrição             |
-|---------------------------------|-----------------------|
-| <kbd>POST /organizacao</kbd>    | Cadastrar organização |
-| <kbd>GET /organizacao </kbd>    | Listar organizações   |
-| <kbd>GET /organizacao/id </kbd> | Buscar organização    |
-| <kbd>PUT /organizacao/id </kbd> | Editar organização    |
-| <kbd>DELETE /organizacao </kbd> | Excluir organização   |
+| Rota                                     | Descrição             |
+|------------------------------------------|-----------------------|
+| <kbd>POST /organizacao</kbd>             | Cadastrar organização |
+| <kbd>GET /organizacao </kbd>             | Listar organizações   |
+| <kbd>GET /organizacao/id </kbd>          | Buscar organização    |
+| <kbd>PUT /organizacao/id </kbd>          | Editar organização    |
+| <kbd>DELETE /organizacao </kbd>          | Excluir organização   |
+| <kbd>POST /autenticacao/registrar </kbd> | Cadastrar usuário     |
+| <kbd>POST /autenticacao/login </kbd>     | Login usuário         |
 
 <h3 id="post-organizacao-detalhes">POST /organizacao</h3>
 
@@ -115,6 +117,55 @@ Este repositório apresenta a API RESTful do projeto
 
 **RESPONSE**<br><br>
 ![Static Badge](https://img.shields.io/badge/204-green) No Content
+
+<h3 id="post-autenticacao-registrar">POST /autenticacao/registrar</h3>
+
+**REQUEST**
+```json
+{
+  "nome": "ze",
+  "email": "zeze@email.com",
+  "senha": "00000000",
+  "role": "ADMIN",
+  "organizacao": 1
+}
+```
+
+**RESPONSE**
+```json
+{
+  "id": 3,
+  "nome": "ze",
+  "email": "zeze@email.com",
+  "role": "ADMIN",
+  "foto_url": "",
+  "organizacaoDTO": {
+    "id": 1,
+    "nome": "jonas org",
+    "url_imagem": "link",
+    "ativo": true
+  }
+}
+```
+***
+
+<h3 id="post-autenticacao-login">POST /autenticacao/login</h3>
+
+**REQUEST**
+```json
+{
+  "email": "zeze@email.com",
+  "senha": "00000000"
+}
+```
+
+**RESPONSE**
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsaW5jYWRpbmhvLWFwaSIsInN1YiI6InplemVAZW1haWwuY29tIiwiZXhwIjoxNzM0MjE1NTM1fQ.YMgqCSTAOyE74e3_Hiu0EGspnvQw_jEtOHSfKnR9kIE"
+}
+```
+
 
 
 
