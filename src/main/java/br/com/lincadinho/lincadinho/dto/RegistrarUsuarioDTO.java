@@ -21,7 +21,6 @@ public record RegistrarUsuarioDTO(
 
         UserRole role,
 
-        @NotNull(message = "A organização não pode ser nula")
         Long organizacao
 ) {
 }

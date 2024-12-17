@@ -2,6 +2,8 @@ package br.com.lincadinho.lincadinho.service;
 
 import br.com.lincadinho.lincadinho.dto.CadastrarOrganizacaoDTO;
 import br.com.lincadinho.lincadinho.model.organizacao.Organizacao;
+import br.com.lincadinho.lincadinho.model.usuario.UserRole;
+import br.com.lincadinho.lincadinho.model.usuario.Usuario;
 import br.com.lincadinho.lincadinho.repository.OrganizacaoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +22,24 @@ public class OrganizacaoService {
     private OrganizacaoRepository organizacaoRepository;
 
     @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
     private AWSService awsService;
 
-    public Organizacao criarOrganizacao(CadastrarOrganizacaoDTO dados) {
+    public Organizacao criarOrganizacao(CadastrarOrganizacaoDTO dados, String email_administrador) {
         String url = null;
 
         if (dados.logo() != null) {
             url = this.awsService.uploadImagem(dados.logo());
         }
 
-        Organizacao organizacao = new Organizacao(dados.nome(), url);
+        var usuarioAdministrador = (Usuario) usuarioService.loadUserByUsername(email_administrador);
+        usuarioAdministrador.setRole(UserRole.ADMIN);
+
+        Organizacao organizacao = new Organizacao(dados.nome(), url, usuarioAdministrador);
+        usuarioAdministrador.setOrganizacao(organizacao);
+
         return organizacaoRepository.save(organizacao);
     }
 

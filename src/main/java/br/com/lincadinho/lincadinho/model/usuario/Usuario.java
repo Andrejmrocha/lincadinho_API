@@ -39,13 +39,11 @@ public class Usuario implements UserDetails {
     private Organizacao organizacao;
 
     public Usuario(RegistrarUsuarioDTO dados, String senhaCripto, Organizacao organizacao) {
-        System.out.println("Inicio construtor usuario");
         this.nome = dados.nome();
         this.email = dados.email();
         this.senha = senhaCripto;
         this.role = dados.role();
         this.organizacao = organizacao;
-        System.out.println("Fim construtor usuario");
     }
 
     @Override

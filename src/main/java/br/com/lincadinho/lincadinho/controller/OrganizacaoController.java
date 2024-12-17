@@ -13,6 +13,7 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -33,7 +34,8 @@ public class OrganizacaoController {
             @RequestParam(value = "imagem", required = false)MultipartFile imagem,
             UriComponentsBuilder uriComponentsBuilder) {
         CadastrarOrganizacaoDTO cadastrarOrganizacaoDTO = new CadastrarOrganizacaoDTO(nome, imagem);
-        Organizacao organizacao = organizacaoService.criarOrganizacao(cadastrarOrganizacaoDTO);
+        Organizacao organizacao = organizacaoService.criarOrganizacao(cadastrarOrganizacaoDTO,
+                SecurityContextHolder.getContext().getAuthentication().getName());
         var uri = uriComponentsBuilder.path("organizacao/{id}").buildAndExpand(organizacao.getId()).toUri();
         return ResponseEntity.created(uri).body(new DetalharOrganizacaoDTO(organizacao));
     }
